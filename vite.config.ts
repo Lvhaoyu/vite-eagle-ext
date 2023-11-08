@@ -14,6 +14,15 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: r('extension')
+    outDir: r('extension'),
+    emptyOutDir: false,
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        entryFileNames: `assets/[name].js`,
+        chunkFileNames: `assets/[name].js`,
+        assetFileNames: `assets/[name].[ext]`
+      }
+    }
   }
 })

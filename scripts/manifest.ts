@@ -45,8 +45,9 @@ export async function getManifest() {
     devTools: false,
     main: {
       url: 'index.html',
-      width: 640,
-      height: 480
+      width: 1120,
+      height: 700,
+      frame: false
     }
   }
 
