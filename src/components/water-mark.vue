@@ -12,16 +12,24 @@ const watermarkConfig = ref<WatermarkProps>({
     content: '核心机密',
     fontSize: 16,
     lineHeight: 16,
+    fontWeight: 400,
+    fontColor: 'rgba(128, 128, 128, .3)',
     width: 192,
     height: 128,
     xOffset: 12,
     yOffset: 28,
-    rotate: -15
+    rotate: -15,
+    xGap: 0,
+    yGap: 0,
 })
 const handleExportImage = () => {
     const element = document.querySelector('.watermark') as HTMLElement
+    console.log(fileItem.value.width, fileItem.value.height)
     html2canvas(element).then(function (canvas) {
-        document.body.appendChild(canvas);
+        const imgUrl = canvas.toDataURL();
+        eagle.item.addFromURL(imgUrl, {
+            name: fileItem.value.name + '_' + 'watermark'
+        })
     });
 }
 

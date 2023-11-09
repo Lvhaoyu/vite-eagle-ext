@@ -4,10 +4,11 @@ interface FileItem {
   filePath: string
   width: number
   height: number
+  name: string
 }
 
 export const useWatermark = () => {
-  const fileItem = ref<FileItem>({ filePath: '', width: 0, height: 0 })
+  const fileItem = ref<FileItem>({ filePath: '', width: 0, height: 0, name: '' })
   const isEmpty = computed(() => {
     return !fileItem.value.filePath
   })
@@ -18,7 +19,8 @@ export const useWatermark = () => {
     fileItem.value = {
       filePath: item.filePath,
       width: item.width,
-      height: item.height
+      height: item.height,
+      name: item.name
     }
   })
 
