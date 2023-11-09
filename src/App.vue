@@ -6,17 +6,9 @@ import './assets/app.css'
 
 <template>
   <Header />
-  <div :class="$style['container']">
     <WaterMark />
-  </div>
 </template>
 
 <style module lang="less">
-.container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 </style>

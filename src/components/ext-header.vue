@@ -30,6 +30,8 @@ const handlePositiveClick = () => {
     padding: 8px;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, calc(10 / 100));
+    user-select: none;
 
     .drag {
         -webkit-app-region: drag;
