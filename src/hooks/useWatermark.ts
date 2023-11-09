@@ -2,11 +2,12 @@ import { onMounted, computed, ref } from 'vue'
 
 interface FileItem {
   filePath: string
-  fileURL: string
+  width: number
+  height: number
 }
 
 export const useWatermark = () => {
-  const fileItem = ref<FileItem>({ filePath: '', fileURL: '' })
+  const fileItem = ref<FileItem>({ filePath: '', width: 0, height: 0 })
   const isEmpty = computed(() => {
     return !fileItem.value.filePath
   })
@@ -16,7 +17,8 @@ export const useWatermark = () => {
     const item = items[0]
     fileItem.value = {
       filePath: item.filePath,
-      fileURL: item.fileURL
+      width: item.width,
+      height: item.height
     }
   })
 

@@ -31,10 +31,13 @@ const handleExportImage = () => {
 <template>
     <NConfigProvider :theme="darkTheme" :class="$style['theme']">
         <NEmpty v-if="isEmpty" />
-        <div :class="$style['water-mark']" v-else>
-            <NWatermark v-bind="watermarkConfig" class="watermark">
-                <img :class="$style['image-container']" :src="fileItem.filePath"/>
-            </NWatermark>
+        <div :class="$style['left-container']" v-else>
+            <div :class="$style['watermark-container']">
+                <NWatermark v-bind="watermarkConfig" class="watermark">
+                    <img :class="$style['image-container']" :src="fileItem.filePath" />
+                </NWatermark>
+            </div>
+
             <div :class="$style['image-form']">
                 <WatermarkForm :watermarkConfig="watermarkConfig" />
                 <NButton @click="handleExportImage">导出</NButton>
@@ -52,17 +55,28 @@ const handleExportImage = () => {
     justify-content: center;
 }
 
-.water-mark {
+.left-container {
     width: 100%;
     height: 100%;
     display: flex;
 
-    .image-container {
-        display: flex;
-        height: 100%;
-        width: 100%;
+    .watermark-container {
+        width: auto;
+        height: auto;
         flex: 1;
-        object-fit: contain;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .image-container {
+        display: block;
+        max-width: 100%;
+        /* 图片最大宽度为容器宽度 */
+        max-height: 100%;
+        /* 图片最大高度为容器高度 */
+        width: auto;
+        height: auto;
     }
 
     .image-form {
