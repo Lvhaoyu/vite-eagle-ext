@@ -1,7 +1,7 @@
 import fs from 'fs-extra'
 import type PkgType from '../package.json'
 import { v4 as uuidv4 } from 'uuid'
-import { log, r } from './utils'
+import { log, r, EXTNAME } from './utils'
 
 export interface EagleManifest {
   id: string
@@ -39,9 +39,9 @@ export async function getManifest() {
     version: pkg.version,
     platform: 'all',
     arch: 'all',
-    name: pkg.name,
+    name: EXTNAME,
     logo: './logo.png',
-    keywords: [pkg.name],
+    keywords: [EXTNAME],
     devTools: false,
     main: {
       url: 'index.html',

@@ -2,7 +2,7 @@
 import { type FileItem } from '@/hooks/useWatermark';
 import { NWatermark, NEmpty, NConfigProvider, NButton, darkTheme } from 'naive-ui';
 import type { WatermarkProps, } from 'naive-ui'
-import { ref, type PropType } from 'vue';
+import { ref, type PropType, computed } from 'vue';
 import WatermarkForm from './watermark-form.vue'
 import html2canvas from 'html2canvas';
 
@@ -41,11 +41,16 @@ const handleExportImage = () => {
     });
 }
 
+
+const theme = computed(() => {
+    return eagle.app.isDarkColors() ? darkTheme : undefined;
+})
+
 </script>
 
 <template>
-    <NConfigProvider :theme="darkTheme" :class="$style['theme']">
-        <NEmpty v-if="isEmpty" description="请从 eagle 中拖拽或在打开插件前选中文件" />
+    <NConfigProvider :theme="theme" :class="$style['theme']">
+        <NEmpty v-if="isEmpty" description="请从 eagle 中拖拽或在打开插件前选中文件（支持 jpg，png）" />
         <div :class="$style['left-container']" v-else>
             <div :class="$style['watermark-container']">
                 <NWatermark v-bind="watermarkConfig" class="watermark">

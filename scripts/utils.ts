@@ -5,3 +5,5 @@ export const r = (...args: string[]) => resolve(__dirname, '..', ...args)
 export function log(name: string, message: string) {
   console.log(black(bgCyan(` ${name} `)), message)
 }
+
+export const EXTNAME = '图片水印大师'
