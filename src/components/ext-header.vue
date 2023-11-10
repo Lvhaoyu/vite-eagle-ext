@@ -11,7 +11,7 @@ const handlePositiveClick = () => {
     <div :class="$style['header']">
         <div :class="$style['drag']">
             <img src="../assets/logo.png" alt="watermark" :class="$style['logo']">
-            <span :class="$style['title']">图片添加水印</span>
+            <span :class="$style['title']">图片水印大师</span>
         </div>
         <NPopconfirm @positive-click="handlePositiveClick" negative-text="取消" positive-text="确认">
             <template #trigger>
