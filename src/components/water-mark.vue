@@ -1,13 +1,22 @@
 <script setup lang="ts">
-import { useWatermark } from '@/hooks/useWatermark';
+import { type FileItem } from '@/hooks/useWatermark';
 import { NWatermark, NEmpty, NConfigProvider, NButton, darkTheme } from 'naive-ui';
 import type { WatermarkProps, } from 'naive-ui'
-import { ref } from 'vue';
+import { ref, type PropType } from 'vue';
 import WatermarkForm from './watermark-form.vue'
 import html2canvas from 'html2canvas';
 
 
-const { isEmpty, fileItem } = useWatermark()
+const props = defineProps({
+    isEmpty: {
+        type: Boolean,
+        default: false
+    },
+    fileItem: {
+        type: Object as PropType<FileItem>,
+        default: null
+    }
+})
 const watermarkConfig = ref<WatermarkProps>({
     content: '核心机密',
     fontSize: 16,
@@ -24,21 +33,19 @@ const watermarkConfig = ref<WatermarkProps>({
 })
 const handleExportImage = () => {
     const element = document.querySelector('.watermark') as HTMLElement
-    console.log(fileItem.value.width, fileItem.value.height)
     html2canvas(element).then(function (canvas) {
         const imgUrl = canvas.toDataURL();
         eagle.item.addFromURL(imgUrl, {
-            name: fileItem.value.name + '_' + 'watermark'
+            name: props.fileItem.name + '_' + 'watermark'
         })
     });
 }
-
 
 </script>
 
 <template>
     <NConfigProvider :theme="darkTheme" :class="$style['theme']">
-        <NEmpty v-if="isEmpty" />
+        <NEmpty v-if="isEmpty" description="请从 eagle 中拖拽或在打开插件前选中文件" />
         <div :class="$style['left-container']" v-else>
             <div :class="$style['watermark-container']">
                 <NWatermark v-bind="watermarkConfig" class="watermark">
